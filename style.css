@@ -46,93 +46,89 @@ body {
   border-radius: var(--radius-card);
   border: 1px solid var(--card-border);
   box-shadow: var(--shadow-soft);
-  overflow: visible; /* pour laisser respirer l’avatar */
+  overflow: hidden;
   padding-bottom: 20px;
 }
 
-/* Header */
+/* Couverture */
 
 .card-header {
   position: relative;
+  width: 100%;
+}
+
+.cover-frame {
+  position: relative;
+  aspect-ratio: 480 / 328;
+  overflow: hidden;
+  background: #17130f;
+}
+
+.cover-frame::before {
+  content: "";
+  position: absolute;
+  inset: -16px;
+  background: url("img/cover-640x800.avif") center 42% / cover no-repeat;
+  filter: blur(12px);
+  opacity: 0.78;
+  transform: scale(1.06);
 }
 
 .cover {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
-
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;         /* bords arrondis de la cover */
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
-/* Bouton share (optionnel, très léger) */
-
-.share-btn {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
-  border: 1px solid #e5e7eb;
-  background: rgba(255, 255, 255, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--text-main);
-  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
-}
-
-.share-btn i {
-  font-size: 14px;
-}
-
-.share-btn:hover {
-  transform: translateY(-1px);
-}
-
-/* Avatar */
+/* Avatar superposÃ© */
 
 .avatar-wrapper {
   position: absolute;
+  z-index: 2;
   left: 50%;
-  bottom: -46px;
+  bottom: -66px;
   transform: translateX(-50%);
-  width: 92px;
-  height: 92px;
-  border-radius: 999px;
-  padding: 3px;
+
+  width: 88px;
+  height: 88px;
+  padding: 4px;
+
   background: #ffffff;
-  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+  border-radius: 50%;
+  border: 1px solid rgba(229, 231, 235, 0.8);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.16);
 }
 
 .avatar {
+  display: block;
   width: 100%;
   height: 100%;
-  border-radius: inherit;
-  border: 1px solid #e5e7eb;
-  object-fit: cover;
-  object-position: center -25px;
 
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
 }
 
-/* Profile */
+/* Espace nÃ©cessaire sous lâ€™avatar */
 
 .profile {
-  padding: 64px 24px 12px;
+  padding: 90px 24px 12px;
   text-align: center;
 }
 
 .profile h1 {
   margin: 0 0 4px;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
 }
 
 .tagline {
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-muted);
 }
 
@@ -156,7 +152,7 @@ body {
   border: 1px solid #e5e7eb;
   color: var(--text-main);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 17.5px;
   transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, border-color 0.12s;
 }
 
@@ -195,7 +191,7 @@ body {
   border-color: #111827;
 }
 
-/* Icône = image Noun Project */
+/* IcÃ´ne = image Noun Project */
 
 .link-icon {
   width: 36px;
@@ -210,24 +206,35 @@ body {
 }
 
 .link-icon img {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+  display: block;
+  transform: translateX(4px);
+}
+
+.link-icon--application img {
+  width: 45px;
+  height: 45px;
   object-fit: contain;
   display: block;
 }
 
+
+
 .link-text {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .link-title {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
 }
 
 .link-subtitle {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-muted);
   margin-top: 2px;
 }
@@ -244,22 +251,23 @@ body {
 /* Responsive */
 
 @media (max-width: 480px) {
+  .page {
+    padding: 12px;
+    align-items: flex-start;
+  }
+
   .card {
     border-radius: 20px;
   }
 
-  .card-header {
-    padding-inline: 14px;
-  }
-
   .avatar-wrapper {
-    width: 84px;
-    height: 84px;
-    bottom: -42px;
+    width: 82px;
+    height: 82px;
+    bottom: -60px;
   }
 
   .profile {
-    padding-top: 64px;
+    padding: 84px 18px 12px;
   }
 
   .links {
