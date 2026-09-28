@@ -220,6 +220,13 @@ body {
   display: block;
 }
 
+.link-icon--teacher img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+}
+
 
 
 .link-text {
